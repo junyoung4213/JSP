@@ -1,0 +1,7 @@
+#Tomcat publish data
+#Fri Apr 10 02:21:16 KST 2020
+org.eclipse.jst.jee.server\:testPjtConfig=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\testPjtConfig
+org.eclipse.jst.jee.server\:lec08_exercise=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\lec08_exercise
+org.eclipse.jst.jee.server\:servletDataPjt=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\servletDataPjt
+org.eclipse.jst.jee.server\:lec09_exercise=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\lec09_exercise
+org.eclipse.jst.jee.server\:lec11Pjt001=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\lec11Pjt001

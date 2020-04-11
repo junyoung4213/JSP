@@ -1,0 +1,43 @@
+<form 데이터 처리>
+
+유저가 데이터 입력 후 전송을 하면
+
+웹 컨테이너(tomcat)로 전송된다(Request).
+
+위 방식에는 doGet과 doPost가 있다.
+
+<doGet 방식>
+form 태그에서 method="get" 이런 방식으로 보내면
+
+웹 컨테이너에서는 doGet() 메서드가 받는다.
+
+method 속성을 안쓰면? default 값이 get이므로 doGet()이 받는다.
+
+사용자 정보가 URL에 노출되기 때문에 보안에 약함.
+
+URL에 텍스트가 나열될 수 있는 한계가 존재하므로, 많은 데이터 전송에 불리하다.
+
+<doPost 방식>
+form 태그에서 method="post" 이런 방식으로 보내면
+
+웹 컨테이너에서는 doPost() 메서드가 받는다.
+
+데이터가 HTTP Request에 포함되어 웹 서버로 전송되므로 보안에 강하다.
+
+URL에는 맵핑 주소만 출력된다.
+
+하나의 데이터를 받을 때는 getParameter를 쓰면 되고
+
+여러개의 값을 받을 때에는 getParameterValues를 쓰면 된다.
+ ex)체크박스
+
+getParameterNames를 쓰면 서버쪽으로 날아온 name의 속성값을 알아 낼 수 있다.
+(프론트와 백엔드가 나누어져있을 때, 백엔드 개발자가 프론트 정보를 얻기 좋은 방법)
+
+<메모>
+
+<form 태그의 속성들>
+action : servlet의 annotation이나 name을 써주어야한다.
+method : get이나 post 방식을 써주어야한다.
+
+

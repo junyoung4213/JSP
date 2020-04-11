@@ -1,0 +1,23 @@
+<request.setCharacterEncoding("UTF-8");
+
+response.setCharacterEncoding("UTF-8");
+
+response.setContentType("text/html; charset=utf-8") >의 차이점!!
+
+폼 태그에서 입력한 값을 POST 방식으로 보낼 때 값이 '한글' 일 경우!!
+
+=> request.setCharacterEncoding("UTF-8")을 써야한다!!
+
+Q) GET으로 보낼때에도 써야하나?
+A) 아니다. GET 방식으로 보낸 '한글'은 톰캣이 기본적으로
+    UTF-8 문자코드가 적용이 되어 있어서 자동으로 한글처리를 해주기 때문이다.
+
+<서블릿에서 화면에 데이터를 출력하기 위해서는??>
+response.setCharacterEncoding("UTF-8")을 써야한다.
+//여기까지만 하면 servlet콘솔창에는 잘 나오지만 웹페이지에서는 외계어나옴.
+
+하지만 이것만 사용해서는 이상한 문자가 여전히 출력되는데, 
+브라우저마다 기본적으로 문자 코드를 해석하는 디폴트가 다르기 때문이다.
+그러므로 브라우저한테 'UTF-8'을 사용하겠다고 메세지를 전달해야 하는데
+이것이 response.setContentType("text/html;charset=utf-8"); 이다.
+

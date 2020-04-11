@@ -1,0 +1,10 @@
+<JSP request, response>
+
+*<form action="name.jsp" method="get/post">*
+
+request객체 : 요청
+request.getParameter('name')        // 단일 값을 가져올 때
+request.getParameterValues('이름') // 여러 값을 가져올 때
+
+response객체 : 응답
+response.sendRedirect("name.jsp") // 현재 페이지에서 다른 페이지로 리다이렉트 시킨다.

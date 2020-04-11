@@ -1,0 +1,9 @@
+getServletConfig()로 가져오는것과 그냥 Config()로 가져오는것의 차이?
+
+GenericServlet()이 getServletConfig()를 사용해서 config 객체를 가져오므로 
+
+그냥 config만 써도 접근 가능.
+
+마찬가지로 getServletContext()와 application의 차이?
+
+위와 동일한 이유

@@ -1,0 +1,15 @@
+<web.xml을 이용한 맵핑>
+: xml 파일을 연 후 
+<servlet>
+  <servlet-name>servletEx</servlet-name>		// servlet 이름
+  <servlet-class>com.servlet.ServletEx</servlet-class>	// 클래스 경로
+</servlet>
+<servlet-mapping>
+  <servlet-name>servletEx</servlet-name>		// servlet 이름
+  <url-pattern>/SE</url-pattern>			// 맵핑할 이름
+</servlet-mapping>
+
+<Annotation을 이용한 맵핑>
+자바 파일 클래스 시작지점 윗부분에
+@WebServlet ("/맵핑할이름") 
+이렇게 써주면 맵핑이 됨.

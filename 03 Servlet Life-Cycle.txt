@@ -1,0 +1,10 @@
+<Servlet Life-Cycle> : 생명주기 관련 메서드
+1. @PostConstruct // Servlet 준비 단계 : 준비단계에서 별도의 메서드 실행
+2. init()
+3. service
+4. destroy()
+5. @PreDestroy     // Servlet 종료 단계 : 소멸단계에서 별도의 메서드 실행
+
+2,3,4는 Servlet 생성 및 종료 단계.
+
+위 메서드들은 웹 컨테이너(tomcat)가 적절한 시점에 호출해준다.
