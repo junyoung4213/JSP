@@ -19,6 +19,8 @@ C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.c
 \lec19Pjt001\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3985259511.index
 \lec13Pjt001\src
+C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\373676985.index
+\cookiePjt\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\212087187.index
 \lec14Pjt001\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1588972323.index
