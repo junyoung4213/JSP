@@ -1,8 +1,9 @@
 #Tomcat publish data
-#Sat Apr 11 18:52:15 KST 2020
+#Sun Apr 12 14:03:44 KST 2020
 org.eclipse.jst.jee.server\:testPjtConfig=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\testPjtConfig
-org.eclipse.jst.jee.server\:cookiePjt=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\cookiePjt
 org.eclipse.jst.jee.server\:lec08_exercise=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\lec08_exercise
-org.eclipse.jst.jee.server\:servletDataPjt=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\servletDataPjt
+org.eclipse.jst.jee.server\:cookiePjt=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\cookiePjt
 org.eclipse.jst.jee.server\:lec09_exercise=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\lec09_exercise
+org.eclipse.jst.jee.server\:servletDataPjt=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\servletDataPjt
+org.eclipse.jst.jee.server\:sessionPjt=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\sessionPjt
 org.eclipse.jst.jee.server\:lec11Pjt001=C\:\\Users\\chris\\Desktop\\JSP \uC5F0\uC2B5\\apache-tomcat-8.5.53\\wtpwebapps\\lec11Pjt001
