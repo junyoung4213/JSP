@@ -5,6 +5,8 @@ C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.c
 \lec11Pjt001\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2757386300.index
 \lec20Pjt001\src
+C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1726815700.index
+\encoPjt\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1424909317.index
 \lec09_exercise\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3824584562.index

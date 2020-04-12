@@ -1,0 +1,13 @@
+<JSP에서 Servlet으로 한글을 보낼 때 인코딩 처리>
+
+request.setCharacterEncoding("UTF-8");
+		
+response.setContentType("text/html; charset=UTF-8");
+
+<JSP에서 JSP로 보낼 때>
+최상단에 아래 코드 작성
+<% request.setCharacterEncoding("UTF-8"); %>
+
+<GET방식은?>
+
+Server.xml의 Connector 부분에 [URIEncoding="UTF-8"] 를 추가해준다.
