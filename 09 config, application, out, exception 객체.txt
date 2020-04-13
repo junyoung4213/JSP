@@ -23,7 +23,7 @@ String adminId = getServletConfig().getInitParameter("adminId");
 String adminPw = getServletConfig().getInitParameter("adminPw");
 
 getServletConfig()를 사용해서 해당 servlet의 정의되어있는 config 객체를 가져온다.
-(바로 config 객체로 접근해도 된다)
+(GenericServlet을 상속받았다면 바로 config 객체로 접근해도 된다)
 그리고 getInitParameter()를 사용해서 config 객체로부터 servlet이 초기화 될 때 만들어진
 parameter 값을 가져온다.
 
