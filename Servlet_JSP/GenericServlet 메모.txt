@@ -1,0 +1,8 @@
+GenericServlet만 상속받으면 init, destroy 구현을 안해도 되고 
+
+service만 구현하면 되므로 편리함.
+
+Servers 프로젝트
+
+ @WebServlet(urlPatterns = {"/calc","/calc.do","/calculator.action"}) 
+이런식으로 annotation을 배열에 넣어서 지정해줄수도 있다 (잘 안쓰임)

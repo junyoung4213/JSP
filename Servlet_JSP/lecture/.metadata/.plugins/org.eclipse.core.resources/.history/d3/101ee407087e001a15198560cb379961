@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="spms.vo.Member" %>
+<%@ page import="java.util.ArrayList" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 정보</title>
+</head>
+<body>
+	<jsp:useBean id="members" scope="request" class="java.util.ArrayList" type="java.util.ArrayList<spms.vo.Member>" />
+
+	<!-- 스크립트릿 영역 -->
+	<%
+		for(Member member : members){
+	%>
+
+	<h1>회원 정보</h1>
+	<form action='update' method='post'>
+		번호:
+		<input type='text' name='no' value=<%= member.getInt("mno")%> readonly>
+		<br>
+		이름:
+		<input type='text' name='name' value=<%= member.getString("mname")%>>
+		<br>
+		이메일:
+		<input type='text' name='email' value=<%= member.getString("email")%>>
+		<br>
+		가입일: <%= member.getDate("cre_date")%>
+		<br>
+		<input type='submit' value='저장'>
+
+		<input type='button' value='삭제' "
+					+ "onclick='location.href=\"delete?no=" <%= member.getInt("no")%>'>
+		<input type='button' value='취소' " +
+					"onclick='location.href=\"list\"'>
+	</form>
+	<%
+		}
+	%>
+</body>
+</html>
+

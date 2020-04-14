@@ -1,0 +1,19 @@
+<welcome-file>
+
+[xml파일에 아래와 같이 작성한다]
+
+<welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+따로 지정해주지 않아도 웹 어플리케이션이 실행될 때 우선순위를 따져서 실행된다.
+
+우선순위는 위에서 아래로. 
+
+index.html->index.htm->index.jsp->default.html->default.htm->default.jsp
+

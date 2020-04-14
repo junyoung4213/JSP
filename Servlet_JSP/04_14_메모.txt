@@ -1,0 +1,18 @@
+<meta http-equiv="refresh" content="시간(초 단위); 
+URL=이동하고자 하는 웹페이지 또는 미디어 주소">
+
+// 현재 페이지나 사이트를 일시적으로 옮길 때 사용.
+
+클라이언트에서 실행되므로 302 redirect.
+
+서버에서 실행되는건 301 redirect
+
+JSP에서 사용하는 방법은 다음과 같다.
+
+<%
+response.setStatus(301);
+response.setHeader("Location","http://www.new-url.com/");
+response.setHeader("Connection","close");
+%>
+
+사용하는 언어에 따라서 방식은 달라진다.

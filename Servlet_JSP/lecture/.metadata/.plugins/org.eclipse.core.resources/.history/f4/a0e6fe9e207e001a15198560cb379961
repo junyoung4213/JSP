@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body {
+	font-size: small;
+}
+
+table {
+	border: thin solid gray;
+	border-collapse: collapse;
+}
+
+td, th {
+	border: thin dotted gray;
+	padding: 2px;
+}
+
+th {
+	background-color: lightgray;
+}
+pre{fosi90p
+}
+</style>
+</head>
+<body>
+
+</body>
+</html>

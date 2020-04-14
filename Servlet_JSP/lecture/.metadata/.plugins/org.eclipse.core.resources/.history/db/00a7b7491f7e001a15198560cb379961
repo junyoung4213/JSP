@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EL(Expression Language)</title>
+<style>
+	body{font-size: small;}
+	table{
+		border: thin solid gray;
+		border-collapse: collapse;
+	}
+	td,th{
+	border: thin dotted gray;
+	padding: 2px;
+	}
+	th{background-color: lightgray;}
+	pre{font-size: 90%;}
+</style>
+</head>
+<body>
+
+</body>
+</html>

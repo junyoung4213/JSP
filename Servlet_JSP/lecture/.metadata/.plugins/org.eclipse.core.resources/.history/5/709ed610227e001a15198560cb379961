@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>EL - 객체 꺼내기</title>
+<style>
+body {
+	font-size: small;
+}
+
+table {
+	border: thin solid gray;
+	border-collapse: collapse;
+}
+
+td, th {
+	border: thin dotted gray;
+	padding: 2px;
+}
+
+th {
+	background-color: lightgray;
+}
+
+pre {
+	font-size: 90%;
+}
+</style>
+</head>
+<body>
+	<p>
+		<a href="el01.jsp">[이전]</a>
+		<a href="el03.jsp">[다음]</a>
+	</p>
+	
+	
+	<p>
+		<a href="el01.jsp">[이전]</a>
+		<a href="el03.jsp">[다음]</a>
+	</p>
+</body>
+</html>

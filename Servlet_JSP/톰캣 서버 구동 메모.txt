@@ -1,0 +1,21 @@
+apache-tomcat-9.0.33 > bin 폴더에서
+
+startup.sh 누르면 서버가 이클립스를 통하지 않아도 실행됨.
+
+서버 다운시킬때는 shutdown.sh로(리눅스)
+
+startup.bat이나 shutdown.bat은 윈도우용.
+
+프로젝트 우클릭 -> Export -> WAR 생성
+
+apache-tomcat-9.0.33 > webapps 폴더에 저장한다.
+
+그리고 나서 startup.bat 파일을 실행시키면, webapps 폴더에 
+
+방금 저장한 WAR 파일이 압축해제되면서 프로젝트 폴더가 생긴다.
+
+서버 포트를 수정할 땐 Servers 프로젝트 > server.xml에서 직접 바꾸어도 됨.
+
+직접 서버를 돌릴 때에는 포트 8080으로 접근해야한다.
+
+apache-tomcat-9.0.33 > conf 폴더에서 server.xml로 확인가능

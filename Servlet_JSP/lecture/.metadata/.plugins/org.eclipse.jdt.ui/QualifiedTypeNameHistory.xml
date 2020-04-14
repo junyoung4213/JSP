@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="org.apache.commons.fileupload.disk.DiskFileItemFactory"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="org.apache.commons.fileupload.servlet.ServletFileUpload"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="org.apache.commons.fileupload.FileItem"/>
+<fullyQualifiedTypeName name="javax.servlet.Servlet"/>
+<fullyQualifiedTypeName name="javax.annotation.PreDestroy"/>
+<fullyQualifiedTypeName name="javax.servlet.ServletConfig"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.Driver"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="jdk.nashorn.internal.runtime.regexp.joni.Config"/>
+<fullyQualifiedTypeName name="javax.servlet.GenericServlet"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="javax.servlet.Filter"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.WebFilter"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.WebInitParam"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.sun.java.util.jar.pack.Package.Class.Member"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="spms.vo.Member"/>
+<fullyQualifiedTypeName name="javax.servlet.ServletException"/>
+<fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,18 @@
+<클라이언트로부터 전송된 매개변수 값을 UTF-8로 인코딩>
+1. POST요청
+ req.setCharacterEncoding("UTF-8");
+2. GET 요청
+ 위의 방법은 URI에 매개변수가 포함되어서 처리되지 않는다.
+ 그래서 tomcat의 server.xml내에서 
+ 항목을 URIEncoding="UTF-8"/ 추가해줘야 한다.
+ <Connector connectionTimeout="20000" port="9999" protocol="HTTP/1.1" redirectPort="8443" URIEncoding="UTF-8"/>
+ 
+ <서버에서 클라이언트에 전송하는 데이터 코드셋 설정>
+ ; 선택하면 된다
+ ; PrintWriter writer = response.getWriter();
+   getWriter(); 호출 전에 코딩해야 한다.
+ 1. response.setCharacterEncoding("UTF-8");
+ 2. response.setCOntentType("text/plain; charset=UTF-8"); // 평문
+ 3. response.setCOntentType("text/html; charset=UTF-8");  // html
+ 
+ 

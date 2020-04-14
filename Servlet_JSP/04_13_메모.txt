@@ -1,0 +1,55 @@
+@WebServlet(urlPatterns = { "/member/update" }, initParams = {
+		@WebInitParam(name = "driver", value = "com.mysql.cj.jdbc.Driver"),
+		@WebInitParam(name = "url", value = "jdbc:mysql://localhost:3307/studydb?serverTimezone=UTC"),
+		@WebInitParam(name = "username", value = "study"), 
+		@WebInitParam(name = "password", value = "study") })
+
+// 위와 같은 식으로 Annotation으로도 xml에서 가능하다.
+
+[Filter 예제]
+<!-- Servlet 2.4이상부터는 순서가 무관하나 이전버전은 컨텍스트 초기화 매개변수 다음에 위치해야 한다 -->
+<filter>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<filter-class>spms.filters.CharacterEncodingFilter</filter-class>
+	<init-param>
+		<param-name>encoding</param-name>
+		<param-value>UTF-8</param-value>
+	</init-param>
+</filter>
+
+	
+<!-- 모든 주소에 필터를 적용하겠다 -->
+<filter-mapping>
+	<filter-name>CharacterEncodingFilter</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+
+member.setNo(10)
+	  .setName("hong")
+	  .setEmail("hong@daum.net");
+	  
+이렇게 chain형식으로 호출하기 위해서는
+setter의 리턴값을 Member로 바꾸면 된다.
+
+public Member setNo(int no) {
+		this.no = no;
+		return this;
+	}
+
+위와 같은 식으로 set 후에 자기 자신을 리턴하면 chain이 가능해진다.
+
+
+<메모>
+RequestDispatcher // 알아둘것.
+
+<jsp:include page="/Header.jsp"/> 
+// JSP 액션태그. RequestDispatcher보다 간략한 사용법. JSP에서 사용 가능
+
+<에러 포워딩>
+req.setAttribute("error", e);
+
+// 포워딩
+RequestDispatcher rd = req.getRequestDispatcher("/Error.jsp");
+
+rd.forward(req, resp);
+

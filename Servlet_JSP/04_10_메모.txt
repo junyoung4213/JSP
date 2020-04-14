@@ -1,0 +1,5 @@
+a href 요청은 무조건 doGet이 받아준다(get요청))
+
+<meta http-equiv='Refresh' content='1; url=list'> // 헤더부분에 적으면 1초뒤에 Refresh됨.
+
+resp.addHeader("Refresh", "1;url=list"); // 위와 동일. 적는 위치는 상관없음.

@@ -1,0 +1,5 @@
+서버 로직처리는 Java Resources
+
+html js는 WebContent
+
+alt+shift+s+v // 인터페이스 요소 호출

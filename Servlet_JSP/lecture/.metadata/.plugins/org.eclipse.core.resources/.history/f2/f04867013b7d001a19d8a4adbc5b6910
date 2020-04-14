@@ -1,0 +1,5 @@
+package spms.filters;
+
+public class CharacterEncodingFilter {
+
+}

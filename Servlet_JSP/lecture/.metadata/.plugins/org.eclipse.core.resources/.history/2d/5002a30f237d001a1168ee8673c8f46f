@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="_15_JDBCServlet_ServletInitParam_Update">
+        <property name="context-root" value="_15_JDBCServlet_ServletInitParam_Update"/>
+    </wb-module>
+</project-modules>

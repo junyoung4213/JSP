@@ -1,0 +1,120 @@
+package spms.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import spms.vo.Member;
+
+@SuppressWarnings("serial")
+@WebServlet("/member/update")
+public class MemberUpdateServlet extends HttpServlet {
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		final String sqlSelect = "SELECT mno,email,mname,cre_date" + "\r\n" + "FROM members WHERE mno=" + "\r\n"
+				+ req.getParameter("no");
+
+		try {
+			// web.xml에서 모든 서블릿이 공유가능한
+			// 설정 값을 가져온다.
+			ServletContext sc = this.getServletContext();
+			conn = (Connection) sc.getAttribute("conn");
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sqlSelect);
+			if (rs.next()) {
+				req.setAttribute("member", new Member().setNo(rs.getInt("mno")).setEmail(rs.getString("email"))
+						.setName(rs.getString("mname")).setCreatedDate(rs.getDate("cre_date")));
+			} 
+
+			// jsp에 전달하기 위해 request의 공유공간에 저장한다
+
+			RequestDispatcher rd = req.getRequestDispatcher("/member/MemberUpdateForm.jsp");
+			rd.forward(req, resp);
+
+		} catch (Exception e) {
+			req.setAttribute("error", e);
+
+			RequestDispatcher rd = req.getRequestDispatcher("/Error.jsp");
+			rd.forward(req, resp);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+//			try {
+//				if(conn!=null) 
+//					conn.close();
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}			
+		}
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// Filter로 옮김
+		// req.setCharacterEncoding("UTF-8");
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		final String sqlUpdate = "UPDATE members SET email=?," + "\r\n" + "mname=?,mod_date=now() WHERE mno=?";
+		try {
+			ServletContext sc = this.getServletContext();
+			conn = (Connection) sc.getAttribute("conn");
+		
+			stmt = conn.prepareStatement(sqlUpdate);
+			stmt.setString(1, req.getParameter("email"));
+			stmt.setString(2, req.getParameter("name"));
+			stmt.setInt(3, Integer.parseInt(req.getParameter("no")));
+			stmt.executeUpdate();
+
+			resp.sendRedirect("list");
+
+		} catch (Exception e) {
+//			throw new ServletException(e);
+			e.printStackTrace();
+			req.setAttribute("error", e);
+			RequestDispatcher rd = req.getRequestDispatcher("/Error.jsp");
+			rd.forward(req, resp);
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+//			try {
+//				if(conn!=null) 
+//					conn.close();
+//			}catch(Exception e) {
+//				e.printStackTrace();
+//			}				
+		}
+	}
+}

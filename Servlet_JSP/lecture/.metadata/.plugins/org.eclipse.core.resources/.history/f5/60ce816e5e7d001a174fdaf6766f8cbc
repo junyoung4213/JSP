@@ -1,0 +1,12 @@
+package spms.vo;
+
+/*
+ * VO(Value Object)
+ * 1) DB의 테이블/View와 1:1 관계
+ * 2) 객체간의 매개 변수(DTO)
+ *  ; Data Transfer Object
+*/
+
+public class Member {
+	
+}

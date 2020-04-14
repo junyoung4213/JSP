@@ -1,0 +1,31 @@
+package lesson03.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class CalculatorServlet extends GenericServlet {
+
+	@Override
+	public void service(ServletRequest req, ServletResponse resp) throws ServletException, IOException {
+		
+		int a = Integer.parseInt(req.getParameter("a"));
+		int b = Integer.parseInt(req.getParameter("b"));
+		
+		resp.setContentType("text/plain"); // plain : 평문 텍스트
+		resp.setCharacterEncoding("UTF-8");
+		PrintWriter out = resp.getWriter();
+		out.println("a="+a+","+"b="+b+"의 계산 결과");
+		out.println("a + b = " + (a+b));
+		out.println("a - b = " + (a-b));
+		out.println("a * b = " + (a*b));
+		out.println("a / b = " + ((float)a/(float)b));
+		out.println("a % b = " + (a%b));
+		
+	}
+
+}

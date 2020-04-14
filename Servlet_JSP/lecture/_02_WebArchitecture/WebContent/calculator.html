@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<!-- action : 서버의 주소
+	 method : get/post 전송 방식
+	 name : 서버에서 변수이름
+	 value : 변수에 들어간 값
+-->
+<head>
+<meta charset="UTF-8">
+<title>계산기</title>
+</head>
+<body>
+	<h1>계산기</h1>
+	<form action="calc" method="post">
+		<input type="text" name="v1" style="width:50px;">
+		<select name="op">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input type="text" name="v2" style="width:50px;">
+		<input type="submit" value="=">
+	</form>
+</body>
+</html>

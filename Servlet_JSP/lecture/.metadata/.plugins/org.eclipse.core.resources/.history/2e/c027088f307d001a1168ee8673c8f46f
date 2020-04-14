@@ -1,0 +1,8 @@
+package spms.servlets;
+
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("member/delete")
+public class MemberDeleteServlet {
+	
+}
