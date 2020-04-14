@@ -1,0 +1,35 @@
+###서블릿간에 작업을 위임하는 방법
+
+포워딩(forwarding) : 다른 서블릿으로 작업을 위임한 후 다시 이전 서블릿으로 제어권이 돌아오지 않음
+
+인클루딩(including) : 다른 서블릿으로 작업을 위임한 후 다시 이전 서블릿으로 제어권이 돌아옴, 
+호출 받은 서블릿이 작업을 완료한 후에 호출한 서블릿에 남은 작업이 있으면 돌아가서 마무리함
+
+###예제
+포워딩
+MemberListServlet에서 조회도중 예외 발생
+Error.jsp 페이지로 포워딩 수행
+Error.jsp 페이지는 오류 내용을 출력하고 그대로 종료
+
+인클루딩
+MemberListServlet에서 MemberList.jsp 페이지를 인클루딩
+MemberList.jsp 는 내부에서 제목부분을 출력하는 Header.jsp 페이지를 인클루딩
+Header.jsp 페이지가 출력을 마친 후 제어권은 다시 MemberList.jsp 로 넘어와서 나머지 출력부분을 출력
+모든 출력이 완료된 후 제어권은 MemberListServlet으로 돌아옴
+memberListServlet은 나머지 작업을 수행한 후 응답을 완료
+
+###사용방법
+
+포워딩(Servlet에서 사용하는 경우)
+RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
+rd.forward(request, response);
+
+포워딩(JSP에서 사용하는 경우)
+<jsp:forward page="/header.jsp"/>
+
+인클루딩(Servlet에서 사용하는 경우)
+RequestDispatcher rd = request.getRequestDispatcher("/Header.jsp");
+rd.include(request, response);
+
+인클루딩(JSP에서 사용하는 경우)
+<jsp:include page="/header.jsp"/>

@@ -2,26 +2,34 @@ package com.servlet.dto;
 
 public class DTO {
 
-	String email;
-	String pwd;
+	String id;
+	String pw;
 	String mname;
+	String birth_date;
 	
-	public DTO(String email, String pwd, String mname) {
-		this.email=email;
-		this.pwd=pwd;
+	public DTO(String id, String pw, String mname,String birth_date) {
+		this.id=id;
+		this.pw=pw;
 		this.mname=mname;
+		this.birth_date=birth_date;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getId() {
+		return id;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getPw() {
+		return pw;
 	}
 
 	public String getMname() {
 		return mname;
 	}
+
+	public String getBirth_date() {
+		return birth_date;
+	}
+
+	
 	
 }

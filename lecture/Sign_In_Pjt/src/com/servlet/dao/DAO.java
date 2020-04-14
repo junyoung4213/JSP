@@ -7,24 +7,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
-import javax.servlet.annotation.WebServlet;
 
 import com.servlet.dto.DTO;
 
-@WebServlet("/DAO")
 public class DAO {
 	ServletContext sc; // 외부에서 들어온 ServletContext를 저장하기 위한 공간 선언.
-	
-//	@Override
-//	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//		try {
-//			Class.forName(this.getInitParameter("driver"));
-//
-//		} catch (Exception e) {
-//		}
-//	}
-	
+
 	public DAO(ServletContext sc){	//DAO 생성시, ServletContext를 매개변수로 받아서 필드에 저장한다.
 		this.sc=sc;	
 	}
@@ -44,11 +32,12 @@ public class DAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				String email = rs.getString("email");
-				String pwd = rs.getString("pwd");
+				String id = rs.getString("id");
+				String pw = rs.getString("pw");
 				String mname = rs.getString("mname");
+				String birth_date = rs.getString("birth_date");
 
-				DTO dto = new DTO(email, pwd, mname);
+				DTO dto = new DTO(id, pw, mname,birth_date);
 				list.add(dto);
 
 			}
@@ -68,6 +57,45 @@ public class DAO {
 
 		return list;
 
+	}
+	
+	public int add(DTO dto){
+	
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		int result=0;
+	
+
+		try {
+			Class.forName(sc.getInitParameter("driver"));
+			con = DriverManager.getConnection(sc.getInitParameter("url"), sc.getInitParameter("id"), sc.getInitParameter("pw"));
+			String sql = "INSERT INTO members(id,pw,mname,birth_date) VALUES(?,?,?,?);";
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, dto.getId());
+			pstmt.setString(2, dto.getPw());
+			pstmt.setString(3, dto.getMname());
+			pstmt.setString(4, dto.getBirth_date());
+			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+
+			
+
+		} catch (Exception e) {
+			try {
+
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (Exception e2) {
+				e2.getStackTrace();
+			}
+		}
+		
+		return result;
 	}
 
 }

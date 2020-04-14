@@ -31,15 +31,15 @@
 	</context-param>
 	<context-param>
 		<param-name>url</param-name>
-		<param-value>jdbc:mysql://localhost:3307/studydb?serverTimezone=UTC</param-value>
+		<param-value>jdbc:mysql://localhost:3307/userinfo?serverTimezone=UTC</param-value>
 	</context-param>
 	<context-param>
 		<param-name>id</param-name>
-		<param-value>study</param-value>
+		<param-value>root</param-value>
 	</context-param>
 	<context-param>
 		<param-name>pw</param-name>
-		<param-value>study</param-value>
+		<param-value>1111</param-value>
 	</context-param>
 
 	<welcome-file-list>

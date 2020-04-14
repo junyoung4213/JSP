@@ -31,5 +31,7 @@ C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.c
 \lec03Pjt001\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3192198613.index
 \sessionPjt\src
+C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1817590478.index
+\Sign_In_Pjt\src
 C:\Users\chris\Desktop\JSP 연습\lecture\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\274548889.index
 \lec18Pjt001\src
