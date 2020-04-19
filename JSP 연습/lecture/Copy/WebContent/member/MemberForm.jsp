@@ -8,7 +8,7 @@
 <body>
 	<jsp:include page="/Header.jsp" />
 	<h1>회원목록</h1>
-	<form action="add" method="post">
+	<form action="add.do" method="post">
 		이름 :
 		<input type="text" name="name" />
 		<br>

@@ -20,8 +20,7 @@ public class MemberAdd extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/member/MemberForm.jsp");
-		rd.forward(request, response);
+		request.setAttribute("viewUrl", "/member/MemberForm.jsp");
 	}
 
 	@Override
@@ -41,13 +40,11 @@ public class MemberAdd extends HttpServlet {
 			memberDao.insert(new Member().setEmail(request.getParameter("email")).setPassword(request.getParameter("password")).setName(request.getParameter("name")));
 			
 //			res.addHeader("Refresh", "1; url=list");	// 리프레쉬 방법2. 헤더에 추가시킨다.
-			response.sendRedirect("list");
-		} catch (Exception e) {
-//			throw new ServletException(e);
-			request.setAttribute("error", e);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
-			rd.forward(request, response);
+			request.setAttribute("viewUrl", "redirect:list.do");
+		} catch (Exception e) {
+			throw new ServletException(e);
+			
 		} 
 		
 	}

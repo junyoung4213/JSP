@@ -52,13 +52,13 @@ public class Dispatcher extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(pageControllerPath);
 			rd.include(request, response);
 
-			String viewURL = (String) request.getAttribute("viewURL");
+			String viewUrl = (String) request.getAttribute("viewUrl");
 
-			if (viewURL.startsWith("redirect:")) {
-				response.sendRedirect(viewURL.substring(9));
+			if (viewUrl.startsWith("redirect:")) {
+				response.sendRedirect(viewUrl.substring(9));
 				return;
 			} else {
-				rd = request.getRequestDispatcher(viewURL);
+				rd = request.getRequestDispatcher(viewUrl);
 				rd.include(request, response);
 			}
 

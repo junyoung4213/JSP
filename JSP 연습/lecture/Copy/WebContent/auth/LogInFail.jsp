@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="2; url=login">
+<meta http-equiv="refresh" content="2; url=login.do">
 <title>로그인 실패</title>
 </head>
 <body>

@@ -35,22 +35,11 @@ public class MemberList extends HttpServlet {
 			// request 공유 공간에 저장한다.
 			request.setAttribute("members", members);
 			
-			// RequestDispatcher로 MemberList.jsp에 출력을 위임한다.
-			RequestDispatcher rd = request.getRequestDispatcher("/member/MemberList.jsp");
-			rd.include(request, response);
-			/*
-			 * jsp로 위임하는 방식 2가지
-			 * 1) forward : 제어권을 아예 넘겨준다
-			 * 2) include : 실행이 끝나면 제어권을 넘겨받는다.
-			 */
+			// 어느 URL로 보낼 것인지 request 공유 공간에 저장한다.
+			request.setAttribute("viewUrl", "/member/MemberList.jsp");
 			
 		} catch (Exception e) {
-//			throw new ServletException(e);
-			request.setAttribute("error", e);
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
-			rd.forward(request, response);
-			
+			throw new ServletException(e);
 		} 
 	}
 }

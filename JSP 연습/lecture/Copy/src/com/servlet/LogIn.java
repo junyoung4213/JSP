@@ -21,8 +21,7 @@ public class LogIn extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/auth/LogInForm.jsp");
-		rd.forward(request, response);
+		request.setAttribute("viewUrl", "/auth/LogInForm.jsp");
 
 	}
 
@@ -32,20 +31,18 @@ public class LogIn extends HttpServlet {
 		try {
 			ServletContext sc = this.getServletContext();
 //			Connection conn = (Connection) sc.getAttribute("conn");
-			
-			MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
+
+			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
 //			memberDao.setConnection(conn);
 			Member member = memberDao.exist(request.getParameter("email"), request.getParameter("password"));
 
 			if (member != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("member", member);
-				response.sendRedirect("../member/list");
+				request.setAttribute("viewUrl", "redirect:../member/list.do");
 
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("/auth/LogInFail.jsp");
-				rd.forward(request, response);
-
+				request.setAttribute("viewUrl", "/auth/LogInFail.jsp");
 			}
 
 		} catch (Exception e) {
