@@ -51,6 +51,11 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- 웹어플리케이션 시작/종료 이벤트 리스너 -->
+	<listener>
+		<listener-class>com.listeners.ContextLoaderListener</listener-class>
+	</listener>
+
 	<!-- <servlet> <servlet-name>MemberUpdate</servlet-name> <servlet-class>com.servlet.MemberUpdate</servlet-class> 
 		<init-param> <param-name>driver</param-name> <param-value>com.mysql.cj.jdbc.Driver</param-value> 
 		</init-param> <init-param> <param-name>url</param-name> <param-value>jdbc:mysql://localhost:3307/studydb?serverTimezone=UTC</param-value> 
@@ -59,12 +64,20 @@
 		</init-param> </servlet> <servlet-mapping> <servlet-name>MemberUpdate</servlet-name> 
 		<url-pattern>/member/update</url-pattern> </servlet-mapping> -->
 
-	<!--   -->
+	<!-- AppInit 서블릿 선언 / 대신할 리스너를 등록했으므로 주석처리 -->
+	<!-- 
 	<servlet>
 		<servlet-name>AppInit</servlet-name>
 		<servlet-class>com.servlet.AppInit</servlet-class>
 		<load-on-startup>1</load-on-startup>
-	</servlet>
+	</servlet> 
+	-->
+	
+	<resource-ref>
+		<res-ref-name>jdbc/studydb</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>

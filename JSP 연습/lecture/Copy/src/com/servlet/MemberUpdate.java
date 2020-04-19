@@ -2,10 +2,6 @@ package com.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dao.MemberDao;
 import com.vo.Member;
 
 /* <어노테이션으로 initparam 등록하는 방법>
@@ -36,27 +33,19 @@ public class MemberUpdate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		final String sqlSelect = "SELECT mno, email, mname, cre_date FROM members WHERE mno="
-				+ request.getParameter("no");
 		try {
 			ServletContext sc = this.getServletContext();
 
-			conn = (Connection) sc.getAttribute("conn");
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sqlSelect);
+//			Connection conn = (Connection) sc.getAttribute("conn");
 
-			if (rs.next()) {
+			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
 
-				Member member = new Member().setNo(rs.getInt(1)).setEmail(rs.getString(2)).setName(rs.getString(3))
-						.setCreatedDate(rs.getDate(4));
+//			memberDao.setConnection(conn);
 
-				request.setAttribute("member", member);
-			} else {
-				throw new Exception("해당 회원을 찾을 수 없습니다");
-			}
+			Member member = memberDao.selectOne(Integer.parseInt(request.getParameter("no")));
+
+			request.setAttribute("member", member);
+
 			RequestDispatcher rd = request.getRequestDispatcher("/member/MemberUpdateForm.jsp");
 			rd.include(request, response);
 
@@ -67,49 +56,30 @@ public class MemberUpdate extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
 			rd.forward(request, response);
 
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stmt != null)
-					stmt.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-
 		}
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		final String sqlUpdate = "UPDATE members SET email=?, mname=?, mod_date=now() WHERE mno=?";
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		try {
 			ServletContext sc = this.getServletContext();
-			Class.forName(sc.getInitParameter("driver"));
-			conn = DriverManager.getConnection(sc.getInitParameter("url"), sc.getInitParameter("username"),
-					sc.getInitParameter("password"));
-			pstmt = conn.prepareStatement(sqlUpdate);
+//			Connection conn = (Connection) sc.getAttribute("conn");
 
-			pstmt.setString(1, req.getParameter("email"));
-			pstmt.setString(2, req.getParameter("name"));
-			pstmt.setInt(3, Integer.parseInt(req.getParameter("no")));
+			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+//			memberDao.setConnection(conn);
 
-			pstmt.executeUpdate();
+			memberDao.update(new Member().setEmail(request.getParameter("email")).setName(request.getParameter("name"))
+					.setNo(Integer.parseInt(request.getParameter("no"))));
 
-			resp.sendRedirect("list");
+			response.sendRedirect("list");
 
 		} catch (Exception e) {
-			throw new ServletException(e);
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+			e.printStackTrace();
+			request.setAttribute("error", e);
+			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
+			rd.forward(request, response);
 		}
 
 	}

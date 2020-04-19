@@ -1,0 +1,44 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> // JSP 파일 맨 윗단에 기재해야 JSTL 사용 가능
+
+1) <c:out value="문자열"> // 문자열을 출력하는 태그이다. el태그와 조합해서도 사용 가능하다.
+ex) <c:out value="${number}"> 이런식으로 사용한다.
+
+2)<c:set var="변수명" value="저장할값"> // 값을 설정하는 태그이다. 마찬가지로 el태그와 조합가능.
+기본적으로 page 영역에 저장된다. scope 속성으로 지정가능(page,request,session,application)하다.
+이미 존재하는 변수명에 c:set을 하면 덮어 씌워진다. 
+만약 객체의 프로퍼티 값을 변경하고자 하면
+<c:set target="${객체명}" property="프로퍼티명" value="바꿀값"> 이런식으로 변경할 수 있다.
+
+3)<c:remove var="변수명"> // 보관소에 저장된 값을 제거하는 태그이다.
+
+4)<c:if test="조건식" var="변수명"> // if문과 같다고 보면 된다. 대신, test의 이름을 var로 지정할 수 있다.
+var에 지정한 변수명으로 호출하면, if문의 결과값이 반환된다.
+
+5)<c:choose> // switch와 동일하다. <c:when> (java의 case), <c:otherwise> (java의 default)와 같이 사용한다.
+<c:choose>
+	<c:when test="조건"> 실행값 </c:when>
+	<c:otherwise> 실행값 </c:otherwise>
+</c:choose>
+
+6)<c:forEach var="변수명" items="배열"> // 자바의 foreach문과 동일하다. 배열의 값을 각각 꺼내서 var에 지정한 변수명으로 사용한다.
+
+begin으로 시작index를 지정, end로 끝index를 지정 가능하고 step으로 증가값을 지정할 수 있다(기본 1)
+
+7)<c:forTokens var="변수명" items="문자열" delims="구분자"> // java의 split과 동일하다. 문자열을 구분자로 분리해서 출력할 수 있다.
+
+8)<c:url var="변수명" value="URL주소"> // 이 태그는 URL주소에 자동으로 ContextPath를 붙여주는 역할을 한다.
+
+따라서 컨텍스트를 변경하더라도 URL을 수정할 필요가 없게 된다. 
+
+<c:url value="/userSearch.do" var="url">
+  <c:param name="name" value="홍길동" />
+  <c:param name="page" value="3" />
+</c:url>
+
+조회값이 계속 URL에 따라 다녀야 할 경우, param 프로퍼티를 사용해서 인코딩 할 수 있다. 
+
+변수명으로 다른곳에서 사용할 수 있도록 해줄수도 있다.
+
+9)<c:import var="변수명" url="URL주소"> // URL주소로부터 값을 가져와서 변수명으로 저장시킨다.
+
+10)<c:redirect url="URL주소"> // URL주소로 리다이렉트시키는 태그다.

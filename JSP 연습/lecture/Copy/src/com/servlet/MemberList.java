@@ -2,10 +2,7 @@ package com.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -15,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dao.MemberDao;
 import com.vo.Member;
 
 @SuppressWarnings("serial")
@@ -25,28 +23,16 @@ public class MemberList extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
 
-		String sql = "SELECT mno,mname,email,cre_date FROM members";
 		try {
-			ServletContext sc = this.getServletContext();
-
-			conn = (Connection)sc.getAttribute("conn");
+			ServletContext sc = this.getServletContext();			
+//			Connection conn = (Connection)sc.getAttribute("conn");
 			
-			stmt = conn.createStatement();
+			MemberDao memberDao = (MemberDao)sc.getAttribute("memberDao");
+//			memberDao.setConnection(conn);
+			
+			List<Member> members = memberDao.selectList();
 
-			// 4) Query 전송
-			rs = stmt.executeQuery(sql);
-
-			// 회원이 여러명이므로 Member 객체를 담을 수 있는 ArrayList를 만든다.
-			ArrayList<Member> members = new ArrayList<Member>();
-	
-			// 회원 정보를 ArrayList에 담는다.
-			while (rs.next()) {
-				members.add(new Member().setNo(rs.getInt(1)).setName(rs.getString(2)).setEmail(rs.getString(3)).setCreatedDate(rs.getDate(4)));
-			}
 			// request 공유 공간에 저장한다.
 			request.setAttribute("members", members);
 			
@@ -66,16 +52,6 @@ public class MemberList extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
 			rd.forward(request, response);
 			
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (stmt != null)
-					stmt.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-
-		}
+		} 
 	}
 }

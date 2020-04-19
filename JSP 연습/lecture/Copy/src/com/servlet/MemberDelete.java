@@ -12,44 +12,38 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.dao.MemberDao;
+
 @SuppressWarnings("serial")
 @WebServlet("/member/delete")
 public class MemberDelete extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		final String sqlDelete = "DELETE FROM members WHERE mno=?";
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 		try {
 			ServletContext sc = this.getServletContext();
-			conn = (Connection)sc.getAttribute("conn");
-			pstmt = conn.prepareStatement(sqlDelete);
+//			Connection conn = (Connection) sc.getAttribute("conn");
 
-			pstmt.setInt(1, Integer.parseInt(request.getParameter("no")));
-			pstmt.executeUpdate();
-			
+			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+
+//			memberDao.setConnection(conn);
+
+			memberDao.delete(Integer.parseInt(request.getParameter("no")));
+
 			response.sendRedirect("list");
 
 		} catch (Exception e) {
 //			throw new ServletException(e);
-			
+
 			request.setAttribute("error", e);
-			
+
 			RequestDispatcher rd = request.getRequestDispatcher("/Error.jsp");
 			rd.forward(request, response);
-			
-		} finally {
-			try {
-				if (pstmt != null)
-					pstmt.close();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
+
 		}
 
 	}
-	
+
 }
