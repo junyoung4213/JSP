@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
  * 서블릿 객체가 생성될 때 제일 먼저 실행되는 init() 메서드를 이용해서 Connection을 미리 셋팅한다.
  * web.xml에서 제일 먼저 이 클래스가 실행되도록 설정해주어야한다.
 */
+@SuppressWarnings("serial")
 public class AppInit extends HttpServlet {
 
 	@Override

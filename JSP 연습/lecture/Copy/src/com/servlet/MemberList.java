@@ -1,7 +1,6 @@
 package com.servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;

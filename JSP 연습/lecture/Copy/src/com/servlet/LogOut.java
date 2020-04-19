@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class LogOut
  */
+@SuppressWarnings("serial")
 @WebServlet("/auth/logout")
 public class LogOut extends HttpServlet {
 

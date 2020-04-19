@@ -1,52 +1,33 @@
 package com.listeners;
 
-
+import javax.naming.InitialContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import javax.sql.DataSource;
 
 import com.dao.MemberDao;
 
 public class ContextLoaderListener implements ServletContextListener {
-	
-	BasicDataSource ds = null;
+
+//	BasicDataSource ds = null;
 
 //	DBConnectionPool connPool;
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
-		System.out.println("contextDestroyed 마무리...");
-
-		try {
-			if(ds!=null)
-				ds.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		// 톰캣 서버에서 자동으로 커넥션을 관리해주므로 필요없다.
 	}
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-		System.out.println("contextInitialized 준비...");
 		try {
+			System.out.println("contextInitialized 준비...");
 			ServletContext sc = sce.getServletContext();
-			
-			ds = new BasicDataSource();
-			ds.setDriverClassName(sc.getInitParameter("driver"));
-			ds.setUrl(sc.getInitParameter("url"));
-			ds.setUsername(sc.getInitParameter("username"));
-			ds.setPassword(sc.getInitParameter("password"));
-			
-			/*
-			 * connPool = new
-			 * DBConnectionPool(sc.getInitParameter("driver"),sc.getInitParameter("url"),
-			 * sc.getInitParameter("username"), sc.getInitParameter("password"));
-			 */
-			
+
+			InitialContext initialContext = new InitialContext();
+			DataSource ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/studydb");
+
 			MemberDao memberDao = new MemberDao();
 			memberDao.setDataSource(ds);
 
