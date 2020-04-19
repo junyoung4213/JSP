@@ -1,14 +1,23 @@
 package com.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.controls.Controller;
+import com.controls.LogInController;
+import com.controls.LogOutController;
+import com.controls.MemberAddController;
+import com.controls.MemberDeleteController;
+import com.controls.MemberListController;
+import com.controls.MemberUpdateController;
 import com.vo.Member;
 
 /**
@@ -25,40 +34,62 @@ public class Dispatcher extends HttpServlet {
 		String ServletPath = request.getServletPath();
 
 		try {
-			String pageControllerPath = null;
+			Controller pageController = null;
 
+			ServletContext sc = this.getServletContext();
+			
+			// pageController에게 전달할 Map 객체를 준비
+			HashMap<String, Object> model = new HashMap<String, Object>();
+			// model에 memberDao 객체를 저장하고
+			model.put("memberDao", sc.getAttribute("memberDao"));
+			// model에 session 객체를 저장해준다(로그인&로그아웃때 사용할 것)
+			model.put("session",request.getSession());
+			
 			if ("/member/list.do".equals(ServletPath)) {
-				pageControllerPath = "/member/list";
+				pageController = new MemberListController();
 			} else if ("/member/add.do".equals(ServletPath)) {
-				pageControllerPath = "/member/add";
-			} else if ("/member/update.do".equals(ServletPath)) {
-				pageControllerPath = "/member/update";
+				pageController = new MemberAddController();
 				if (request.getParameter("email") != null) {
-					request.setAttribute("member", new Member().setEmail(request.getParameter("email"))
+					model.put("member", new Member().setEmail(request.getParameter("email"))
 							.setName(request.getParameter("name")).setPassword(request.getParameter("password")));
 				}
-			} else if ("/member/delete.do".equals(ServletPath)) {
-				pageControllerPath = "/member/delete";
+			} else if ("/member/update.do".equals(ServletPath)) {
+				pageController = new MemberUpdateController();
 				if (request.getParameter("email") != null) {
-					request.setAttribute("member", new Member().setNo(Integer.parseInt(request.getParameter("no")))
-							.setEmail(request.getParameter("email")).setName(request.getParameter("name")));
+					model.put("member", new Member().setEmail(request.getParameter("email"))
+							.setName(request.getParameter("name")).setNo(Integer.parseInt(request.getParameter("no"))));
+				} else {
+					model.put("no", new Integer(request.getParameter("no")));
+					// request.getParameter("no")의 반환값은 String이라서 HashMap 저장형식과 다르므로 new Integer로
+					// Object화 시켜주었다.
 				}
+			} else if ("/member/delete.do".equals(ServletPath)) {
+				pageController = new MemberDeleteController();
+				model.put("no", new Integer(request.getParameter("no")));
 			} else if ("/auth/login.do".equals(ServletPath)) {
-				pageControllerPath = "/auth/login";
+				pageController = new LogInController();
+				if(request.getParameter("email")!=null) {
+					model.put("login", new Member().setEmail(request.getParameter("email")).setPassword(request.getParameter("password")));
+				}
 			} else if ("/auth/logout.do".equals(ServletPath)) {
-				pageControllerPath = "/auth/logout";
+				pageController = new LogOutController();
+			}
+			
+			// pageController 객체에 업무를 위임한다.
+			String viewUrl = pageController.excute(model);
+
+			// jsp에 전달할 객체를 request공간에 저장한다.
+			for (String key : model.keySet()) {
+				request.setAttribute(key, model.get(key));
 			}
 
-			RequestDispatcher rd = request.getRequestDispatcher(pageControllerPath);
-			rd.include(request, response);
-
-			String viewUrl = (String) request.getAttribute("viewUrl");
-
+			// viewUrl이 'redirect:' 로 시작하면 뒷부분의 주소로 리다이렉트시킨다.
 			if (viewUrl.startsWith("redirect:")) {
 				response.sendRedirect(viewUrl.substring(9));
 				return;
 			} else {
-				rd = request.getRequestDispatcher(viewUrl);
+				// 아니라면 RequestDispatcher를 이용해서 viewUrl로 처리를 요청한다.
+				RequestDispatcher rd = request.getRequestDispatcher(viewUrl);
 				rd.include(request, response);
 			}
 
