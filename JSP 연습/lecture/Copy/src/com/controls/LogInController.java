@@ -8,6 +8,13 @@ import com.dao.MemberDao;
 import com.vo.Member;
 
 public class LogInController implements Controller {
+	
+	MemberDao memberDao;
+	
+	public LogInController setMemberDao(MemberDao memberDao) {
+		this.memberDao=memberDao;
+		return this;
+	}
 
 	@Override
 	public String excute(Map<String, Object> model) throws Exception {
@@ -16,8 +23,6 @@ public class LogInController implements Controller {
 
 			return "/auth/LogInForm.jsp";
 		} else {
-
-			MemberDao memberDao = (MemberDao) model.get("memberDao");
 
 			Member login = (Member) model.get("login");
 

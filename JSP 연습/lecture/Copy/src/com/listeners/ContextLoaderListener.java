@@ -6,6 +6,12 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.sql.DataSource;
 
+import com.controls.LogInController;
+import com.controls.LogOutController;
+import com.controls.MemberAddController;
+import com.controls.MemberDeleteController;
+import com.controls.MemberListController;
+import com.controls.MemberUpdateController;
 import com.dao.MemberDao;
 
 public class ContextLoaderListener implements ServletContextListener {
@@ -31,8 +37,17 @@ public class ContextLoaderListener implements ServletContextListener {
 			MemberDao memberDao = new MemberDao();
 			memberDao.setDataSource(ds);
 
-			sc.setAttribute("memberDao", memberDao);
+			sc.setAttribute("/auth/login.do", new LogInController().setMemberDao(memberDao));
+			sc.setAttribute("/auth/logout.do", new LogOutController());
+			sc.setAttribute("/member/add.do", new MemberAddController().setMemberDao(memberDao));
+			sc.setAttribute("/member/delete.do", new MemberDeleteController().setMemberDao(memberDao));
+			sc.setAttribute("/member/list.do", new MemberListController().setMemberDao(memberDao));
+			sc.setAttribute("/member/update.do", new MemberUpdateController().setMemberDao(memberDao));
+			// 향후 자동화 작업을 위해서 이렇게 변경한다
+			// MemberDao는 Controller클래스 객체에 DI 작업을 한다
 
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

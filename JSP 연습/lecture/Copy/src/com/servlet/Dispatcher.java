@@ -31,30 +31,24 @@ public class Dispatcher extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String ServletPath = request.getServletPath();
+		String servletPath = request.getServletPath();
 
 		try {
-			Controller pageController = null;
-
 			ServletContext sc = this.getServletContext();
 			
+			Controller pageController = (Controller) sc.getAttribute(servletPath);
 			// pageController에게 전달할 Map 객체를 준비
 			HashMap<String, Object> model = new HashMap<String, Object>();
-			// model에 memberDao 객체를 저장하고
-			model.put("memberDao", sc.getAttribute("memberDao"));
 			// model에 session 객체를 저장해준다(로그인&로그아웃때 사용할 것)
 			model.put("session",request.getSession());
 			
-			if ("/member/list.do".equals(ServletPath)) {
-				pageController = new MemberListController();
-			} else if ("/member/add.do".equals(ServletPath)) {
-				pageController = new MemberAddController();
+			if ("/member/list.do".equals(servletPath)) {
+			} else if ("/member/add.do".equals(servletPath)) {
 				if (request.getParameter("email") != null) {
 					model.put("member", new Member().setEmail(request.getParameter("email"))
 							.setName(request.getParameter("name")).setPassword(request.getParameter("password")));
 				}
-			} else if ("/member/update.do".equals(ServletPath)) {
-				pageController = new MemberUpdateController();
+			} else if ("/member/update.do".equals(servletPath)) {
 				if (request.getParameter("email") != null) {
 					model.put("member", new Member().setEmail(request.getParameter("email"))
 							.setName(request.getParameter("name")).setNo(Integer.parseInt(request.getParameter("no"))));
@@ -63,16 +57,13 @@ public class Dispatcher extends HttpServlet {
 					// request.getParameter("no")의 반환값은 String이라서 HashMap 저장형식과 다르므로 new Integer로
 					// Object화 시켜주었다.
 				}
-			} else if ("/member/delete.do".equals(ServletPath)) {
-				pageController = new MemberDeleteController();
+			} else if ("/member/delete.do".equals(servletPath)) {
 				model.put("no", new Integer(request.getParameter("no")));
-			} else if ("/auth/login.do".equals(ServletPath)) {
-				pageController = new LogInController();
+			} else if ("/auth/login.do".equals(servletPath)) {
 				if(request.getParameter("email")!=null) {
 					model.put("login", new Member().setEmail(request.getParameter("email")).setPassword(request.getParameter("password")));
 				}
-			} else if ("/auth/logout.do".equals(ServletPath)) {
-				pageController = new LogOutController();
+			} else if ("/auth/logout.do".equals(servletPath)) {
 			}
 			
 			// pageController 객체에 업무를 위임한다.
