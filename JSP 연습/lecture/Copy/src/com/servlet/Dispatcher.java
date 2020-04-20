@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bind.DataBinding;
 import com.bind.ServletRequestDataBinder;
+import com.context.ApplicationContext;
 import com.controls.Controller;
+import com.listeners.ContextLoaderListener;
 import com.vo.Member;
 
 /**
@@ -31,26 +33,28 @@ public class Dispatcher extends HttpServlet {
 		String servletPath = request.getServletPath();
 
 		try {
-			ServletContext sc = this.getServletContext();
-			
-			// sc에 저장한 servletPath에 상응하는 Controller객체를 추출한다.
-			Controller pageController = (Controller) sc.getAttribute(servletPath);
-			
+
+			ApplicationContext ctx = ContextLoaderListener.getApplicationContext();
+
+			Controller pageController = (Controller) ctx.getBean(servletPath);
+
+			if (pageController == null) {
+				throw new Exception("요청한 서비스를 찾을 수 없습니다");
+			}
+
 			// pageController에게 전달할 Map 객체를 준비한다
 			HashMap<String, Object> model = new HashMap<String, Object>();
-			
+
 			// model에 session 객체를 저장해준다(로그인&로그아웃때 사용할 것)
-			model.put("session",request.getSession());
-			
-			if(pageController instanceof DataBinding) {
+			model.put("session", request.getSession());
+
+			if (pageController instanceof DataBinding) {
 				/*
-				 * request : 클라이언트의 매개변수를 추출
-				 * model : vo객체를 저장
-				 * pageController : 준비해야 할 vo객체 정보 제공
-				*/
-				prepareRequestData(request,model,(DataBinding)pageController);
+				 * request : 클라이언트의 매개변수를 추출 model : vo객체를 저장 pageController : 준비해야 할 vo객체 정보 제공
+				 */
+				prepareRequestData(request, model, (DataBinding) pageController);
 			}
-			
+
 			// pageController 객체에 업무를 위임한다.
 			String viewUrl = pageController.excute(model);
 
@@ -77,28 +81,26 @@ public class Dispatcher extends HttpServlet {
 		}
 
 	}
-	
-	public void prepareRequestData(HttpServletRequest request, HashMap<String,Object> model, DataBinding databinding) throws Exception{
-		//생성해야 할 vo 객체 정보를 얻는다
-		Object[] dataBinders =  databinding.getDataBinders();
+
+	public void prepareRequestData(HttpServletRequest request, HashMap<String, Object> model, DataBinding databinding)
+			throws Exception {
+		// 생성해야 할 vo 객체 정보를 얻는다
+		Object[] dataBinders = databinding.getDataBinders();
 		String dataName = null; // key 이름
 		Class<?> dataType = null; // 생성할 클래스 정보
 		Object dataObj = null; // 생성한 객체
-		
-		for(int i=0; i<dataBinders.length; i+=2) {
-			dataName = (String)dataBinders[i];
-			dataType = (Class<?>)dataBinders[i+1];
+
+		for (int i = 0; i < dataBinders.length; i += 2) {
+			dataName = (String) dataBinders[i];
+			dataType = (Class<?>) dataBinders[i + 1];
 			/*
-			 * request : 매개변수 추출
-			 * dataType : 객체를 생성할 클래스 타입
-			 * dataName : 매개변수 이름
-			*/
+			 * request : 매개변수 추출 dataType : 객체를 생성할 클래스 타입 dataName : 매개변수 이름
+			 */
 			// 객체를 생성하자
-			dataObj = ServletRequestDataBinder.bind(request,dataType,dataName);
+			dataObj = ServletRequestDataBinder.bind(request, dataType, dataName);
 			// 만들어진 객체를 model에 저장하자
 			model.put(dataName, dataObj);
 		}
-		
-		
+
 	}
 }
