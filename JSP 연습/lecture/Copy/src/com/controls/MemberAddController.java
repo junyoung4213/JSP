@@ -2,10 +2,11 @@ package com.controls;
 
 import java.util.Map;
 
+import com.bind.DataBinding;
 import com.dao.MySqlMemberDao;
 import com.vo.Member;
 
-public class MemberAddController implements Controller {
+public class MemberAddController implements Controller, DataBinding {
 
 	MySqlMemberDao memberDao;
 
@@ -15,13 +16,17 @@ public class MemberAddController implements Controller {
 	}
 
 	@Override
-	public String excute(Map<String, Object> model) throws Exception {
+	public Object[] getDataBinders() {
+		return new Object[] { "member", com.vo.Member.class };
+	}
 
-		if (model.get("member") == null) {
+	@Override
+	public String excute(Map<String, Object> model) throws Exception {
+		Member member = (Member) model.get("member");
+		if (member.getEmail() == null) {
 			return "/member/MemberForm.jsp";
 
 		} else {
-			Member member = (Member) model.get("member");
 			memberDao.insert(member);
 
 			return "redirect:list.do";

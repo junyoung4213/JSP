@@ -11,13 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bind.DataBinding;
+import com.bind.ServletRequestDataBinder;
 import com.controls.Controller;
-import com.controls.LogInController;
-import com.controls.LogOutController;
-import com.controls.MemberAddController;
-import com.controls.MemberDeleteController;
-import com.controls.MemberListController;
-import com.controls.MemberUpdateController;
 import com.vo.Member;
 
 /**
@@ -31,39 +27,28 @@ public class Dispatcher extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// page Controller에 분기 전송을 위해 경로를 얻는다
 		String servletPath = request.getServletPath();
 
 		try {
 			ServletContext sc = this.getServletContext();
 			
+			// sc에 저장한 servletPath에 상응하는 Controller객체를 추출한다.
 			Controller pageController = (Controller) sc.getAttribute(servletPath);
-			// pageController에게 전달할 Map 객체를 준비
+			
+			// pageController에게 전달할 Map 객체를 준비한다
 			HashMap<String, Object> model = new HashMap<String, Object>();
+			
 			// model에 session 객체를 저장해준다(로그인&로그아웃때 사용할 것)
 			model.put("session",request.getSession());
 			
-			if ("/member/list.do".equals(servletPath)) {
-			} else if ("/member/add.do".equals(servletPath)) {
-				if (request.getParameter("email") != null) {
-					model.put("member", new Member().setEmail(request.getParameter("email"))
-							.setName(request.getParameter("name")).setPassword(request.getParameter("password")));
-				}
-			} else if ("/member/update.do".equals(servletPath)) {
-				if (request.getParameter("email") != null) {
-					model.put("member", new Member().setEmail(request.getParameter("email"))
-							.setName(request.getParameter("name")).setNo(Integer.parseInt(request.getParameter("no"))));
-				} else {
-					model.put("no", new Integer(request.getParameter("no")));
-					// request.getParameter("no")의 반환값은 String이라서 HashMap 저장형식과 다르므로 new Integer로
-					// Object화 시켜주었다.
-				}
-			} else if ("/member/delete.do".equals(servletPath)) {
-				model.put("no", new Integer(request.getParameter("no")));
-			} else if ("/auth/login.do".equals(servletPath)) {
-				if(request.getParameter("email")!=null) {
-					model.put("login", new Member().setEmail(request.getParameter("email")).setPassword(request.getParameter("password")));
-				}
-			} else if ("/auth/logout.do".equals(servletPath)) {
+			if(pageController instanceof DataBinding) {
+				/*
+				 * request : 클라이언트의 매개변수를 추출
+				 * model : vo객체를 저장
+				 * pageController : 준비해야 할 vo객체 정보 제공
+				*/
+				prepareRequestData(request,model,(DataBinding)pageController);
 			}
 			
 			// pageController 객체에 업무를 위임한다.
@@ -91,5 +76,29 @@ public class Dispatcher extends HttpServlet {
 			rd.forward(request, response);
 		}
 
+	}
+	
+	public void prepareRequestData(HttpServletRequest request, HashMap<String,Object> model, DataBinding databinding) throws Exception{
+		//생성해야 할 vo 객체 정보를 얻는다
+		Object[] dataBinders =  databinding.getDataBinders();
+		String dataName = null; // key 이름
+		Class<?> dataType = null; // 생성할 클래스 정보
+		Object dataObj = null; // 생성한 객체
+		
+		for(int i=0; i<dataBinders.length; i+=2) {
+			dataName = (String)dataBinders[i];
+			dataType = (Class<?>)dataBinders[i+1];
+			/*
+			 * request : 매개변수 추출
+			 * dataType : 객체를 생성할 클래스 타입
+			 * dataName : 매개변수 이름
+			*/
+			// 객체를 생성하자
+			dataObj = ServletRequestDataBinder.bind(request,dataType,dataName);
+			// 만들어진 객체를 model에 저장하자
+			model.put(dataName, dataObj);
+		}
+		
+		
 	}
 }

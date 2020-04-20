@@ -2,9 +2,10 @@ package com.controls;
 
 import java.util.Map;
 
+import com.bind.DataBinding;
 import com.dao.MySqlMemberDao;
 
-public class MemberDeleteController implements Controller {
+public class MemberDeleteController implements Controller, DataBinding{
 
 	MySqlMemberDao memberDao;
 
@@ -12,6 +13,17 @@ public class MemberDeleteController implements Controller {
 		this.memberDao = memberDao;
 		return this;
 	}
+	
+	
+
+	@Override
+	public Object[] getDataBinders() {
+		return new Object[] {
+			"no", Integer.class
+		};
+	}
+
+
 
 	@Override
 	public String excute(Map<String, Object> model) throws Exception {
