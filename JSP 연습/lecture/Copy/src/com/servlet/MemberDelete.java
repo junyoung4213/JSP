@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 
 @SuppressWarnings("serial")
 @WebServlet("/member/delete")
@@ -23,7 +23,7 @@ public class MemberDelete extends HttpServlet {
 			ServletContext sc = this.getServletContext();
 //			Connection conn = (Connection) sc.getAttribute("conn");
 
-			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+			MySqlMemberDao memberDao = (MySqlMemberDao) sc.getAttribute("memberDao");
 
 //			memberDao.setConnection(conn);
 

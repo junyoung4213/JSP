@@ -2,14 +2,14 @@ package com.controls;
 
 import java.util.Map;
 
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 import com.vo.Member;
 
 public class MemberUpdateController implements Controller {
 
-	MemberDao memberDao;
+	MySqlMemberDao memberDao;
 
-	public MemberUpdateController setMemberDao(MemberDao memberDao) {
+	public MemberUpdateController setMemberDao(MySqlMemberDao memberDao) {
 		this.memberDao = memberDao;
 		return this;
 	}

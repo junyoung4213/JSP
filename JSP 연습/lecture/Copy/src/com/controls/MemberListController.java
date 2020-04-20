@@ -2,7 +2,7 @@ package com.controls;
 
 import java.util.Map;
 
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 
 public class MemberListController implements Controller {
 
@@ -14,9 +14,9 @@ public class MemberListController implements Controller {
 	 * 3) 후에 자동화 작업을 하기 위해서
 	*/
 	
-	MemberDao memberDao;
+	MySqlMemberDao memberDao;
 
-	public MemberListController setMemberDao(MemberDao memberDao) {
+	public MemberListController setMemberDao(MySqlMemberDao memberDao) {
 		this.memberDao = memberDao;
 		return this;
 	}

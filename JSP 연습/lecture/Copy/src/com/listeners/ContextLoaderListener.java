@@ -12,7 +12,7 @@ import com.controls.MemberAddController;
 import com.controls.MemberDeleteController;
 import com.controls.MemberListController;
 import com.controls.MemberUpdateController;
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 
 public class ContextLoaderListener implements ServletContextListener {
 
@@ -34,7 +34,7 @@ public class ContextLoaderListener implements ServletContextListener {
 			InitialContext initialContext = new InitialContext();
 			DataSource ds = (DataSource) initialContext.lookup("java:comp/env/jdbc/studydb");
 
-			MemberDao memberDao = new MemberDao();
+			MySqlMemberDao memberDao = new MySqlMemberDao();
 			memberDao.setDataSource(ds);
 
 			sc.setAttribute("/auth/login.do", new LogInController().setMemberDao(memberDao));

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 import com.vo.Member;
 
 @SuppressWarnings("serial")
@@ -31,7 +31,7 @@ public class LogIn extends HttpServlet {
 			ServletContext sc = this.getServletContext();
 //			Connection conn = (Connection) sc.getAttribute("conn");
 
-			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+			MySqlMemberDao memberDao = (MySqlMemberDao) sc.getAttribute("memberDao");
 //			memberDao.setConnection(conn);
 			Member member = memberDao.exist(request.getParameter("email"), request.getParameter("password"));
 

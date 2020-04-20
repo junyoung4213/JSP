@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 import com.vo.Member;
 
 
@@ -31,7 +31,7 @@ public class MemberAdd extends HttpServlet {
 			
 //			Connection conn = (Connection)sc.getAttribute("conn");
 			
-			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+			MySqlMemberDao memberDao = (MySqlMemberDao) sc.getAttribute("memberDao");
 			
 //			memberDao.setConnection(conn);
 									

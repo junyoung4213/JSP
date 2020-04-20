@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dao.MemberDao;
+import com.dao.MySqlMemberDao;
 import com.vo.Member;
 
 /* <어노테이션으로 initparam 등록하는 방법>
@@ -36,7 +36,7 @@ public class MemberUpdate extends HttpServlet {
 
 //			Connection conn = (Connection) sc.getAttribute("conn");
 
-			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+			MySqlMemberDao memberDao = (MySqlMemberDao) sc.getAttribute("memberDao");
 
 //			memberDao.setConnection(conn);
 
@@ -60,7 +60,7 @@ public class MemberUpdate extends HttpServlet {
 			ServletContext sc = this.getServletContext();
 //			Connection conn = (Connection) sc.getAttribute("conn");
 
-			MemberDao memberDao = (MemberDao) sc.getAttribute("memberDao");
+			MySqlMemberDao memberDao = (MySqlMemberDao) sc.getAttribute("memberDao");
 //			memberDao.setConnection(conn);
 
 			memberDao.update(new Member().setEmail(request.getParameter("email")).setName(request.getParameter("name"))
