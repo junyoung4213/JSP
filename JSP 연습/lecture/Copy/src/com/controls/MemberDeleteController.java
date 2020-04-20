@@ -2,9 +2,11 @@ package com.controls;
 
 import java.util.Map;
 
+import com.annotation.Component;
 import com.bind.DataBinding;
 import com.dao.MySqlMemberDao;
 
+@Component("/member/delete.do")
 public class MemberDeleteController implements Controller, DataBinding{
 
 	MySqlMemberDao memberDao;

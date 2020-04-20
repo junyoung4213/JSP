@@ -4,10 +4,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.annotation.Component;
 import com.bind.DataBinding;
 import com.dao.MySqlMemberDao;
 import com.vo.Member;
 
+@Component("/auth/login.do")
 public class LogInController implements Controller, DataBinding {
 
 	MySqlMemberDao memberDao;

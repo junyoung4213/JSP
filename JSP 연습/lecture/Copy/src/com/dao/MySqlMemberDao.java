@@ -9,8 +9,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.annotation.Component;
 import com.vo.Member;
 
+@Component("memberDao")
 public class MySqlMemberDao implements MemberDao {
 	
 	DataSource ds = null;

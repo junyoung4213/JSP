@@ -2,8 +2,10 @@ package com.controls;
 
 import java.util.Map;
 
+import com.annotation.Component;
 import com.dao.MySqlMemberDao;
 
+@Component("/member/list.do")
 public class MemberListController implements Controller {
 
 	/*

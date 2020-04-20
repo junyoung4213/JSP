@@ -4,9 +4,14 @@ import java.io.FileReader;
 import java.lang.reflect.Method;
 import java.util.Hashtable;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+
+import org.reflections.Reflections;
+
+import com.annotation.Component;
 
 /*
  * application-context.properties 파일을 읽어서 
@@ -29,6 +34,7 @@ public class ApplicationContext {
 		props.load(new FileReader(propertiesPath));
 		
 		prepareObjects(props);	// 객체 생성
+		prepareAnnotationObejcts(); // 애노테이션 포함된 클래스 객체 생성
 		injectDependency();		// memberDao 주입
 	}
 	
@@ -80,5 +86,23 @@ public class ApplicationContext {
 			}
 		}
 		return null;
+	}
+	
+	private void prepareAnnotationObejcts() throws Exception{
+		/*
+		 * Reflections(패키지) : 해당 패키지 하위를 모두 찾는다
+		 * Reflections("spms") : spms 하위를 모두 찾는다
+		 * Reflections("spms.controls") : spms.controls 하위를 모두 찾는다
+		 * Reflections("") : classpath 하위를 모두 찾는다
+		*/
+		Reflections reflector = new Reflections("");
+		
+		// @Component 애노테이션을 가진 type만 추출한다.
+		Set<Class<?>> list = reflector.getTypesAnnotatedWith(Component.class);
+		String key = null;
+		for(Class<?> clazz : list) {
+			key = clazz.getAnnotation(Component.class).value();
+			objTable.put(key,clazz.newInstance());
+		}
 	}
 }
