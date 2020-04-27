@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- sqlSessionFactory 객체를 생성할 때 사용할 파일 -->
+  
+ <configuration>
+ 
+ 	<!--  myBatis가 tomcat서버의 DataSource를 사용하므로 
+ 		  여기서는 db.properties의 정보가 필요없다
+ 	<properties resource="spms/dao/db.properties"/>
+ 	-->
+ 	<typeAliases>
+ 		<typeAlias type="spms.vo.Project" alias="project"/> <!-- spms~는 너무 기니까 project라 부르겠다 -->
+ 		<typeAlias type="spms.vo.Member" alias="member"/>
+ 	</typeAliases>
+ 	
+ 	<!-- transactionManager type
+ 		JDBC    : myBatis가 직접 JDBC의 rollback, commit 사용하여 관리
+ 		MANAGED : WAS(tomcat)에서 관리
+ 	 -->
+ 	<!-- dataSource type
+ 		UNPOOLED  : 커넥션 요청시 커넥션 객체 생성
+ 		POOLED    : 미리 커넥션 풀 생성, 속도가 빠름
+ 		JNDI      : WAS(tomcat)의 DataSource를 사용
+ 	 -->
+ 	<environments default="development">	<!-- 특별한게 없다면 development로 접속하겠다 -->
+ 		<environment id="development">		<!-- development 아이디로 접속하겠다 -->
+ 			<transactionManager type="JDBC"/>	<!-- MyBatis로 쓰려면 JDBC로 적어줘야함 -->
+ 			<dataSource type="JNDI">
+ 				<property name="data_source" value="java:comp/env/jdbc/studydb"/>
+ 				<!-- driver, url, username, password는 직접 myBatis가 JDBC를 이용해서 접속할 때 
+ 					 사용하지만 여기서는 tomcat의 DataSource를 사용하므로 필요없어졌다 -->
+ 			</dataSource>
+ 		</environment>
+ 	</environments>
+ 	
+ 	<!-- 
+ 	1) java의 classpath를 이용
+ 	mapper resource="spms/dao/MySqlMyBatisProjectDao.xml"				 // 상대경로라서 이식성이 뛰어나기 때문에 자주 사용
+ 	
+ 	2) 파일 시스템 경로
+ 	mapper resource="file:///c:/dao/spms/dao/MySqlMyBatisProjectDao.xml" // 이식성이 떨어져서 잘 사용하지않는다.
+ 	 -->
+ 	<mappers>
+ 		<mapper resource="spms/dao/MySqlMyBatisProjectDao.xml"/>
+ 	</mappers>
+ 	
+ 	
+ </configuration>
