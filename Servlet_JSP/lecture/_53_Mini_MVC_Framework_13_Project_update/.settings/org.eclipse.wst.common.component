@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="_15_JDBCServlet_ServletInitParam_Update">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="java-output-path" value="/_15_JDBCServlet_ServletInitParam_Update/build/classes"/>
+        <property name="context-root" value="_53_Mini_MVC_Framework_13_Project_update"/>
+    </wb-module>
+</project-modules>
